@@ -33,6 +33,16 @@ Route::group(['prefix' => 'employer', 'as' => 'employer.'], function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::group(['middleware' => ['verified'] ,'controller' => EmployerController::class], function () {
             Route::get('/dashboard', 'index')->name('dashboard');
+            Route::group(['prefix' => 'jobs', 'as' => 'jobs.'], function () {
+                Route::get('create','create')->name('create');
+                Route::post('/','store')->name('store');
+                Route::post('/accept/{application}','accept')->name('accept');
+                Route::post('/reject/{application}','reject')->name('reject');
+                Route::get('/{job}/edit', 'edit')->name('edit');
+                Route::get('/{job}/applications', 'applications')->name('applications');
+                Route::put('/{job}', 'update')->name('update');
+                Route::delete('{job}', 'destroy')->name('destroy');
+            });
         });
     });
 });

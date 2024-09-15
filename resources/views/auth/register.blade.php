@@ -1,25 +1,7 @@
 @php use App\Enums\UserTypeEnum; @endphp
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
-
-        <!-- Name -->
-        <div class="mt-4">
-            <div class="flex gap-3.5">
-                @foreach(UserTypeEnum::cases() as $type)
-                    @if($type->isNot(UserTypeEnum::Admin))
-                        <div class="flex flex-1 items-center ps-4 border mb-2 border-gray-200 rounded">
-                            <input id="type-{{$type->toString()}}" type="radio" value="{{$type->value}}" name="type"
-                                   @checked(old('type', 1) == $type->value)
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500   focus:ring-2">
-                            <label for="type-{{$type->toString()}}"
-                                   class="w-full py-4 ms-2 text-sm font-medium text-gray-900">{{$type->toString()->ucfirst()}}</label>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-            <x-input-error :messages="$errors->get('type')" class="mt-2"/>
-        </div>
         <div class="">
             <x-input-label for="name" :value="__('Name')"/>
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
@@ -40,6 +22,11 @@
             <x-input-error :messages="$errors->get('phone')" class="mt-2"/>
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('Phone')"/>
+            <x-text-input id="email" class="block mt-1 w-full" type="file" name="image" />
+            <x-input-error :messages="$errors->get('image')" class="mt-2"/>
+        </div>
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')"/>

@@ -56,7 +56,9 @@ class Job extends Model
 
     public function applicants(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'applications', 'job_id', 'applicant_id');
+        return $this->belongsToMany(User::class, 'applications', 'job_id', 'applicant_id')
+            ->using(Application::class)->withPivot(['resume','status','id'])
+            ;
     }
 
     protected function casts(): array

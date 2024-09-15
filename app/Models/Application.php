@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Storage;
 
-class Application extends Model
+class Application extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'applications';
     protected $fillable = [
         'job_id',
         'applicant_id',
@@ -39,7 +41,7 @@ class Application extends Model
 
     protected function resumeUrl(): Attribute
     {
-        return Attribute::ge(fn() => Storage::url($this->resume));
+        return Attribute::get(fn() => Storage::url($this->resume));
     }
 
 }

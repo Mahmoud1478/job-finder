@@ -1,3 +1,4 @@
+@php use App\Models\Skill; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -7,14 +8,40 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white flex justify-between items-center overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     My Jobs
+                </div>
+                <div class="flex justify-center items-center">
+                    <a
+                        href="{{route('employer.jobs.create')}}"
+                        type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
+                        <i class="fas fa-plus"></i>
+                    </a>
+
                 </div>
             </div>
         </div>
     </div>
+    @if(session('success'))
+        <div>
 
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div
+                    class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50"
+                    role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                         fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div> {{session('success')}}</div>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
@@ -24,7 +51,7 @@
                             <div class="">
                                 <div class="relative group">
                                     <div
-                                        class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                                        class="absolute -inset-1  rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                                     <div
                                         class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex w-100 items-top justify-start space-x-6">
                                         <svg class="w-8 h-8 text-purple-600" fill="none" viewBox="0 0 24 24">
@@ -35,64 +62,11 @@
                                         <div class="space-y-2 w-100 grow">
                                             <div class="flex justify-between w-100 items-center">
                                                 <span class="text-slate-800">{{$job->title}}</span>
-                                                <div>
-
-                                                    <button id="dropdownMenuIconButton"
-                                                            data-dropdown-toggle="dropdownDots"
-                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                                                            type="button">
-                                                        <svg class="w-5 h-5" aria-hidden="true"
-                                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                             viewBox="0 0 4 15">
-                                                            <path
-                                                                d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                                                        </svg>
-                                                    </button>
-
-                                                    <!-- Dropdown menu -->
-                                                    <div id="dropdownDots"
-                                                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                            aria-labelledby="dropdownMenuIconButton">
-                                                            <li>
-                                                                <a href="#"
-                                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-2">
-                                                            <a href="#"
-                                                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated
-                                                                link</a>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Dropdown menu -->
-                                                    <div id="dropdownDotsHorizontal" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-                                                            <li>
-                                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="py-2">
-                                                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated link</a>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
                                             </div>
+                                            <div class="flex justify-between w-100 items-center">
+                                                <span class="text-slate-800">{{$job->skills->implode(fn(Skill $skill) => $skill->name,',')}}</span>
+                                            </div>
+
                                             <div class="text-slate-800">
                                                 @if(!$job->isExpired())
                                                     <span
@@ -104,10 +78,51 @@
                                                 <span
                                                     class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">{{$job->applications_count}} Application</span>
                                             </div>
-                                            <div style="margin-top: 20px !important;">
-                                                <a href="https://braydoncoyer.dev/blog/tailwind-gradients-how-to-make-a-glowing-gradient-background"
-                                                   class="block text-indigo-400 group-hover:text-slate-800 transition duration-200"
-                                                   target="_blank">Show →</a>
+
+                                            <div class="flex gap-2" style="margin-top: 25px !important;">
+
+                                                <a
+                                                    href="{{route('job',$job)}}"
+                                                    type="button"
+                                                    target="_blank"
+                                                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2"
+                                                >
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a
+                                                    href="{{route('employer.jobs.edit', $job)}}"
+                                                    role="button"
+                                                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2"
+                                                >
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+
+                                                <a
+                                                    href="{{route('employer.jobs.applications', $job)}}"
+                                                    role="button"
+                                                    class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2"
+                                                    title="Edit"
+                                                >
+                                                    <i class="fas fa-list"></i>
+                                                </a>
+
+                                                <form class="hidden" action="{{route('employer.jobs.destroy',$job)}}"
+                                                      method="post" id="delete-job-{{$job->id}}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form>
+                                                <a
+                                                    role="button"
+                                                    onclick="destroy('delete-job-{{$job->id}}')"
+                                                    href="javascript:void(0)"
+                                                    class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-1 text-center me-2 mb-2"
+                                                >
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+
+
+
+
                                             </div>
 
                                         </div>
@@ -131,4 +146,15 @@
             </div>
         </div>
     </div>
+    @push('js')
+        <script>
+            function destroy(id) {
+                if (!confirm('Are you sure ?!')) {
+                    return;
+                }
+                document.getElementById(id).submit();
+            }
+        </script>
+    @endpush
 </x-app-layout>
+

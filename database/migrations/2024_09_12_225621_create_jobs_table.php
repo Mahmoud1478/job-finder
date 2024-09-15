@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text('responsibilities');
             $table->string('location');
             $table->float('salary_start');
-            $table->float('salary_end');
             $table->boolean('work_type')->default(1);
             $table->dateTime('expired_at');
             $table->boolean('experience_leve')->default(1);

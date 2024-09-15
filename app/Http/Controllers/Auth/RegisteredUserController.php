@@ -22,24 +22,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $data = $request->validate([
+        $data = collect($request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'phone' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            'image' => ['required', 'image'],
             'password' => ['required', 'confirmed',],
             'type' => ['required', new Rules\Enum(UserTypeEnum::class), function ($attribute, $value, $fail) {
                 if (UserTypeEnum::Admin->is(UserTypeEnum::tryFrom($value))) {
                     $fail(trans('validation.exists', ['attribute' => 'type']));
                 }
             }],
-        ]);
+        ]));
+
+        $data->put('image', $request->file('image')->store('users'));
         $user = User::create(collect($data)->except('password_confirmation')->toArray());
-
         event(new Registered($user));
-
         Auth::login($user);
 
-        return redirect(route($user->type->toString().'.dashboard'));
+        return redirect(route($user->type->toString() . '.dashboard'));
     }
 
     /**
