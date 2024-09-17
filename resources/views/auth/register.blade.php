@@ -1,6 +1,6 @@
 @php use App\Enums\UserTypeEnum; @endphp
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('employer.register') }}" enctype="multipart/form-data">
         @csrf
         <div class="">
             <x-input-label for="name" :value="__('Name')"/>
