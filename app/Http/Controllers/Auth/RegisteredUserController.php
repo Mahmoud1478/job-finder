@@ -9,7 +9,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -28,14 +27,10 @@ class RegisteredUserController extends Controller
             'phone' => ['required', 'string', 'max:255', 'unique:' . User::class],
             'image' => ['required', 'image'],
             'password' => ['required', 'confirmed',],
-            'type' => ['required', new Rules\Enum(UserTypeEnum::class), function ($attribute, $value, $fail) {
-                if (UserTypeEnum::Admin->is(UserTypeEnum::tryFrom($value))) {
-                    $fail(trans('validation.exists', ['attribute' => 'type']));
-                }
-            }],
         ]));
 
         $data->put('image', $request->file('image')->store('users'));
+        $data->put('type', UserTypeEnum::Employer);
         $user = User::create(collect($data)->except('password_confirmation')->toArray());
         event(new Registered($user));
         Auth::login($user);
