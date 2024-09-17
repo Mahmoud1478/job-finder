@@ -1,5 +1,14 @@
 @php use App\Enums\UserTypeEnum; @endphp
 <x-guest-layout>
+    @if ($errors->any())
+        <div class="mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="text-red-600">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('employer.register') }}" enctype="multipart/form-data">
         @csrf
         <div class="">
