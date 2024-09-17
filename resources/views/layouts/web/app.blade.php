@@ -77,8 +77,9 @@
                                                  class="img-thumbnail rounded" alt="...">
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('profile')}}">Profile</a>
-                                            <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                                            <a class="dropdown-item"
+                                               href="{{route(auth()->user()->type->profileRouteName())}}">Profile</a>
+                                            <a class="dropdown-item" href="{{route(auth()->user()->type->logoutRouteName())}}">Logout</a>
                                         </div>
                                     </div>
                                 @endauth
