@@ -118,9 +118,11 @@
                             <li>Salary : <span>${{$job->salary_start}} / Mouth</span></li>
                             <li>Application date : <span>{{$job->expired_at->format('d M Y')}}</span></li>
                         </ul>
+                        @if(!auth()->user()?->type->is(\App\Enums\UserTypeEnum::Employer))
                         <div class="apply-btn2">
                             <button data-toggle="modal" data-target="#exampleModalLong" class="btn">Apply Now</button>
                         </div>
+                        @endif
                     </div>
                     <div class="post-details4  mb-50">
                         <!-- Small Section Tittle -->
