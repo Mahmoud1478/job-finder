@@ -186,7 +186,7 @@
                             <div class="job-items">
                                 <div class="company-img">
                                     <a href="#"><img
-                                            src="{{$job->employer->image ? $job->employer->image_url:"/assets/img/icon/job-list1.png"}}"
+                                            src="{{$job->employer->image ? $job->employer->image_url: asset('assets')."/img/icon/job-list1.png"}}"
                                             alt=""></a>
                                 </div>
                                 <div class="job-tittle job-tittle2">

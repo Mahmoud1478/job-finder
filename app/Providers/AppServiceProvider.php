@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (request()->routeIs('employee.*')) {
+        if (!request()->routeIs('employer.*')) {
             Paginator::useBootstrapFour();
         }
     }

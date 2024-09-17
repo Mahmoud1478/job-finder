@@ -6,7 +6,7 @@
     <!-- Hero Area Start-->
     <div class="slider-area ">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-             data-background="assets/img/hero/about.jpg">
+             data-background="{{assert('assets')}}/img/hero/about.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -219,7 +219,7 @@
                                     <div class="job-items">
                                         <div class="company-img">
                                             <a href="#"><img
-                                                    src="{{$job->employer->image ? $job->employer->image_url:"/assets/img/icon/job-list1.png"}}"
+                                                    src="{{$job->employer->image ? $job->employer->image_url: asset('assets')."/img/icon/job-list1.png"}}"
                                                     alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
@@ -263,7 +263,6 @@
         <!--Pagination End  -->
     </div>
     <!-- Job List Area End -->
-
 
 @endsection
 @push('js')
